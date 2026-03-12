@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Trainer ID - Cartao de Treinador Pokemon",
   description: "Crie seu cartao de treinador Pokemon personalizado com animacoes 3D e compartilhe com seus amigos!",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
