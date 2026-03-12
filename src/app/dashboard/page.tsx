@@ -18,9 +18,8 @@ const POKEMON_TYPES = [
   "ground", "flying", "bug", "rock", "ghost", "steel",
 ];
 
-const BADGES = [
-  "Boulder", "Cascade", "Thunder", "Rainbow",
-  "Soul", "Marsh", "Volcano", "Earth",
+const INSIGNIAS = [
+  "Cauda de Dragão", "Collection", "Master Duel",
 ];
 
 interface SelectedCard {
@@ -260,13 +259,13 @@ export default function DashboardPage() {
               />
             </div>
 
-            {/* Badges */}
+            {/* Insígnias */}
             <div>
               <label className="block text-sm font-medium text-pk-text-secondary mb-2">
-                Badges Conquistadas
+                Insígnias Conquistadas
               </label>
               <div className="flex flex-wrap gap-2">
-                {BADGES.map((badge) => (
+                {INSIGNIAS.map((badge) => (
                   <button
                     key={badge}
                     type="button"
