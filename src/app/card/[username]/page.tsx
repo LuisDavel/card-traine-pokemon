@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { PublicCardView } from "./public-card-view";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ username: string }>;
 }
