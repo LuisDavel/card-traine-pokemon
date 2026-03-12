@@ -3,8 +3,8 @@ FROM node:22-alpine AS base
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json package-lock.json* ./
+RUN npm install
 
 # Build the application
 FROM base AS builder
