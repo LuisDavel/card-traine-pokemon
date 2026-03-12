@@ -1,8 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== Dark theme (default) ===== */
+:root,
+[data-theme="dark"] {
+  --pk-red: #DC2626;
+  --pk-red-dark: #991B1B;
+  --pk-dark: #0f0f1a;
+  --pk-surface: #1a1a2e;
+  --pk-card: #16213e;
+  --pk-border: #2a2a4a;
+  --pk-yellow: #FACC15;
+
+  --background: #0f0f1a;
+  --foreground: #ededed;
+
+  --pk-text: #ffffff;
+  --pk-text-secondary: #9ca3af;
+  --pk-text-muted: #6b7280;
+  --pk-input-bg: rgba(15, 15, 26, 0.8);
+  --pk-input-text: #ffffff;
+  --pk-input-placeholder: #555;
+  --pk-glass-bg: rgba(26, 26, 46, 0.7);
+  --pk-glass-border: rgba(255, 255, 255, 0.06);
+  --pk-pokeball-opacity: 0.05;
+}
+
+/* ===== Light theme ===== */
+[data-theme="light"] {
+  --pk-red: #DC2626;
+  --pk-red-dark: #991B1B;
+  --pk-dark: #f5f5f5;
+  --pk-surface: #ffffff;
+  --pk-card: #f0f0f5;
+  --pk-border: #e0e0e8;
+  --pk-yellow: #EAB308;
+
+  --background: #f5f5f5;
+  --foreground: #1a1a2e;
+
+  --pk-text: #1a1a2e;
+  --pk-text-secondary: #4b5563;
+  --pk-text-muted: #9ca3af;
+  --pk-input-bg: #ffffff;
+  --pk-input-text: #1a1a2e;
+  --pk-input-placeholder: #9ca3af;
+  --pk-glass-bg: rgba(255, 255, 255, 0.8);
+  --pk-glass-border: rgba(0, 0, 0, 0.08);
+  --pk-pokeball-opacity: 0.08;
 }
 
 @theme inline {
@@ -10,17 +54,105 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-pk-red: #DC2626;
+  --color-pk-red-dark: #991B1B;
+  --color-pk-dark: var(--pk-dark);
+  --color-pk-surface: var(--pk-surface);
+  --color-pk-card: var(--pk-card);
+  --color-pk-border: var(--pk-border);
+  --color-pk-yellow: #FACC15;
+  --color-pk-text: var(--pk-text);
+  --color-pk-text-secondary: var(--pk-text-secondary);
+  --color-pk-text-muted: var(--pk-text-muted);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }
+
+/* Pokeball animations */
+@keyframes pokeball-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(5deg); }
+  75% { transform: translateY(5px) rotate(-3deg); }
+}
+
+@keyframes pokeball-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pokeball-pulse {
+  0%, 100% { opacity: 0.05; transform: scale(1); }
+  50% { opacity: 0.1; transform: scale(1.05); }
+}
+
+.animate-pokeball-float {
+  animation: pokeball-float 6s ease-in-out infinite;
+}
+
+.animate-pokeball-spin {
+  animation: pokeball-spin 25s linear infinite;
+}
+
+.animate-pokeball-pulse {
+  animation: pokeball-pulse 4s ease-in-out infinite;
+}
+
+/* Pokemon input */
+.pk-input {
+  background: var(--pk-input-bg);
+  border: 2px solid var(--pk-border);
+  border-radius: 12px;
+  padding: 10px 16px;
+  color: var(--pk-input-text);
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.pk-input:focus {
+  outline: none;
+  border-color: var(--pk-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+.pk-input::placeholder { color: var(--pk-input-placeholder); }
+
+/* Pokemon button */
+.pk-btn {
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+  border: none;
+}
+
+.pk-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+}
+
+.pk-btn:active { transform: translateY(0); }
+.pk-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Glass panel */
+.pk-glass {
+  background: var(--pk-glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--pk-glass-border);
+  border-radius: 20px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Theme-aware text utilities */
+.pk-heading { color: var(--pk-text); }
+.pk-body { color: var(--pk-text-secondary); }
+.pk-muted { color: var(--pk-text-muted); }
