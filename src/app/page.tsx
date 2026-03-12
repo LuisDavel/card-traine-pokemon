@@ -27,12 +27,12 @@ export default function HomePage() {
               Trainer<span className="text-red-500">ID</span>
             </span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <Link href="/login" className="text-sm text-pk-text-secondary hover:text-pk-text transition-colors px-4 py-2">
+            <Link href="/login" className="text-xs sm:text-sm text-pk-text-secondary hover:text-pk-text transition-colors px-2 sm:px-4 py-2">
               Entrar
             </Link>
-            <Link href="/register" className="pk-btn text-sm !py-2 !px-5">
+            <Link href="/register" className="pk-btn text-xs sm:text-sm !py-2 !px-3 sm:!px-5">
               Criar Conta
             </Link>
           </div>

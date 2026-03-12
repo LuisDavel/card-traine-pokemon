@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useCallback, type CSSProperties } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { type CSSProperties } from "react";
+import { motion } from "framer-motion";
+import { useTilt } from "@/hooks/use-tilt";
 import "./trainer-card.css";
 
 interface TrainerCardProps {
@@ -63,44 +64,7 @@ export function TrainerCard({
   badges,
   username,
 }: TrainerCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), {
-    stiffness: 150,
-    damping: 20,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), {
-    stiffness: 150,
-    damping: 20,
-  });
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      mouseX.set(x);
-      mouseY.set(y);
-
-      const xPct = ((e.clientX - rect.left) / rect.width) * 100;
-      const yPct = ((e.clientY - rect.top) / rect.height) * 100;
-      cardRef.current.style.setProperty("--x", `${xPct}%`);
-      cardRef.current.style.setProperty("--y", `${yPct}%`);
-    },
-    [mouseX, mouseY]
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    mouseX.set(0);
-    mouseY.set(0);
-    if (cardRef.current) {
-      cardRef.current.style.setProperty("--x", "50%");
-      cardRef.current.style.setProperty("--y", "50%");
-    }
-  }, [mouseX, mouseY]);
+  const { ref: cardRef, rotateX, rotateY, handleMouseMove, handleMouseLeave } = useTilt({ maxTilt: 12 });
 
   const typeColors = favoriteType
     ? TYPE_COLORS[favoriteType] || { main: "#F8D030", dark: "#c4a020" }

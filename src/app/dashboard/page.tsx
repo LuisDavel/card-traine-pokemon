@@ -227,7 +227,7 @@ export default function DashboardPage() {
               <label className="block text-sm font-medium text-pk-text-secondary mb-2">
                 Tipo Favorito
               </label>
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {POKEMON_TYPES.map((type) => (
                   <button
                     key={type}

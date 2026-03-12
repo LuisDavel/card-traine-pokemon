@@ -211,6 +211,29 @@
   transform: translateX(20%);
 }
 
+/* Mobile: scale down cards */
+@media (max-width: 400px) {
+  .pokemon-card-wrapper {
+    width: 220px;
+    height: 308px;
+  }
+
+  .toploader {
+    width: 244px;
+    height: 336px;
+  }
+}
+
+/* Touch devices: always show holo effects since no hover */
+@media (hover: none) and (pointer: coarse) {
+  .pokemon-card__holo {
+    opacity: 0.5;
+  }
+  .pokemon-card__shine {
+    opacity: 0.7;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pokemon-card-wrapper,
   .toploader {

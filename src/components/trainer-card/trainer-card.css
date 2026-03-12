@@ -294,6 +294,53 @@
   opacity: 1;
 }
 
+/* Mobile: scale down card and activate holo effects (no hover on touch) */
+@media (max-width: 400px) {
+  .trainer-card {
+    width: 260px;
+    height: 370px;
+  }
+
+  .trainer-card__banner {
+    height: 130px;
+  }
+
+  .trainer-card__avatar-wrapper {
+    top: 85px;
+  }
+
+  .trainer-card__avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .trainer-card__body {
+    padding: 48px 16px 16px;
+  }
+
+  .trainer-card__name {
+    font-size: 18px;
+  }
+
+  .trainer-card__stat-value {
+    font-size: 15px;
+  }
+
+  .trainer-card-lanyard__strap {
+    height: 50px;
+  }
+}
+
+/* Touch devices: always show holo effects since no hover */
+@media (hover: none) and (pointer: coarse) {
+  .trainer-card__holo {
+    opacity: 0.4;
+  }
+  .trainer-card__shine {
+    opacity: 0.7;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .trainer-card {
     transform: none !important;
